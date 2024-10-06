@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Site rave</title>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="script.js" defer></script>
+    <link rel="shortcut icon" href="astronaura.jpeg" type="image/x-icon">
+    <style>
+       body {
+
+        margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #0f102c, #1b174b); /* Fundo espacial */
+            background-attachment: fixed; /* Fundo fixo */
+            font-family: 'Poppins', sans-serif;
+            color: #000000;
+}
+
+h1 {
+    text-align: center;
+    margin: 2px 0;
+    font-size: 2.5rem;
+    color: #ffffff;
+}
+
+/* Novo container das estrelas */
+.stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Não permite interação */
+    z-index: -1; /* Fica atrás do conteúdo */
+}
+
+/* Criando as estrelas brilhantes */
+.star {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8); /* Brilho das estrelas */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Efeito brilhante */
+    animation: twinkle 5s infinite alternate ease-in-out; /* Animação de brilho */
+}
+
+/* Tamanhos e posições para as estrelas */
+
+.star:nth-child(1) { width: 2px; height: 2px; top: 10%; left: 15%; }
+.star:nth-child(2) { width: 3px; height: 3px; top: 20%; left: 80%; }
+.star:nth-child(3) { width: 4px; height: 4px; top: 30%; left: 25%; }
+.star:nth-child(4) { width: 3px; height: 3px; top: 40%; left: 90%; }
+.star:nth-child(5) { width: 2px; height: 2px; top: 50%; left: 60%; }
+.star:nth-child(6) { width: 5px; height: 5px; top: 60%; left: 75%; }
+.star:nth-child(7) { width: 4px; height: 4px; top: 70%; left: 10%; }
+.star:nth-child(8) { width: 2px; height: 2px; top: 15%; left: 40%; }
+.star:nth-child(9) { width: 5px; height: 5px; top: 25%; left: 50%; }
+.star:nth-child(10) { width: 3px; height: 3px; top: 35%; left: 65%; }
+.star:nth-child(11) { width: 4px; height: 4px; top: 45%; left: 20%; }
+.star:nth-child(12) { width: 2px; height: 2px; top: 55%; left: 80%; }
+.star:nth-child(13) { width: 3px; height: 3px; top: 65%; left: 90%; }
+.star:nth-child(14) { width: 4px; height: 4px; top: 75%; left: 30%; }
+.star:nth-child(15) { width: 2px; height: 2px; top: 85%; left: 70%; }
+.star:nth-child(16) { width: 3px; height: 3px; top: 95%; left: 10%; }
+.star:nth-child(17) { width: 4px; height: 4px; top: 50%; left: 15%; }
+.star:nth-child(18) { width: 5px; height: 5px; top: 60%; left: 45%; }
+.star:nth-child(19) { width: 3px; height: 3px; top: 70%; left: 85%; }
+.star:nth-child(20) { width: 2px; height: 2px; top: 80%; left: 95%; }
+
+
+
+/* Animação de brilho */
+@keyframes twinkle {
+    0% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.6; }
+}
+
+.cabeçalho {
+  
+            background-color: rgb(20, 20, 50);
+            padding: 15px;
+            border-bottom: 2px solid #566985;
+            border-radius: 0 0 15px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 5; /* Certifica que o cabeçalho fique acima do fundo */
+}
+
+
+.cabeçalho nav {
+    display: flex;
+    padding: 10px 20px;
+     cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.cabeçalho nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cabeçalho nav ul li {
+    display: inline;
+    margin: 0 20px;
+}
+
+.cabeçalho nav ul li a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.cabeçalho nav ul li a:hover {
+    color: #57e3f2; /* Cor azul no hover */
+    text-decoration: underline;
+}
+
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+.menu-toggle div {
+    width: 25px;
+    height: 3px;
+    background-color: black;
+    margin: 4px 0;
+    transition: 0.4s;
+}
+
+@media (max-width: 768px) {
+    .cabeçalho nav {
+        display: none;
+        background-color: #fbfbfb;
+        position: absolute;
+        top: 66px;
+        right: 0;
+        width: 100%;
+        z-index: 1;
+    }
+    .cabeçalho nav.active {
+        display: block;
+    }
+    .cabeçalho nav ul {
+        display: block;
+        text-align: left;
+        margin: 0;
+    }
+    .cabeçalho nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+    .menu-toggle {
+        display: block;
+    }
+}
+
+main {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+}
+.foto{
+            position: fixed;
+            top: 50%;
+            left: 30px;
+            transform: translateY(-50%); /* Centraliza verticalmente */
+            width: 335px; /* Ajuste o tamanho conforme necessário */
+            z-index: 10;
+            animation: float 3s ease-in-out infinite; /* Animação de flutuação */
+        }
+
+        /* Animação de flutuação */
+        @keyframes float {
+            0%, 100% { transform: translateY(-50%); }
+            50% { transform: translateY(-48%); }
+        }
+
+
+
+@media (max-width: 1308px) {
+    .foto {
+        display: none;
+    }
+}
+
+.formulario {
+    background: linear-gradient(145deg, #ffffff, #ffffff);
+    border-radius: 15px;
+    max-width: 600px;
+    margin: 20px auto;  /* Ajuste de margem */
+    padding: 30px;  /* Ajuste de padding para telas menores */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.462);
+    
+}
+
+/*começa aqui*/
+/* Estilo para Labels */
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #8ca3c4;
+}
+
+/* Estilo para Inputs e Textareas */
+input[type="text"], textarea {
+    border: none;
+    border-bottom: 2px solid #566985;
+    background: transparent;
+    width: 100%;
+    color: #e4e9f2;
+    padding: 10px 5px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+input[type="text"]:focus, textarea:focus {
+    border-bottom: 2px solid #070707;
+    outline: none;
+}
+
+/* Estilo para o Cabeçalho do Formulário */
+.formulario h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #f39c12;
+}
+
+/* Estilo para Label e Checkbox/Radio na Mesma Linha */
+.formulario .top label {
+    margin-top: 15px;
+    display: inline-block; /* Alinha lado a lado com input */
+}
+
+.formulario .top input[type="checkbox"],
+.formulario .top input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Estilo do Textarea */
+textarea {
+    resize: none;
+    height: 80px;
+}
+
+/* Estilo para Labels */
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #8ca3c4;
+}
+
+/* Estilo para Inputs e Textareas */
+input[type="text"], textarea {
+    border: none;
+    border-bottom: 2px solid #566985;
+    background: transparent;
+    width: 100%;
+    color: #e0e6f0;
+    padding: 10px 5px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+input[type="text"]:focus, textarea:focus {
+    border-bottom: 2px solid #57E3F2;
+    outline: none;
+}
+
+/* Estilo para o Cabeçalho do Formulário */
+.formulario h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #1B174A; /*cor azul */
+}
+
+/* Estilo para Label e Checkbox/Radio na Mesma Linha */
+.formulario .top label {
+    margin-top: 15px;
+    display: inline-block; /* Alinha lado a lado com input */
+}
+
+.formulario .top input[type="checkbox"],
+.formulario .top input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Estilo do Textarea */
+textarea {
+    resize: none;
+    height: 80px;
+}
+
+/* Personalização de Checkbox */
+input[type="checkbox"] {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background-color: #3a3a3a;
+    border: 2px solid #9c9c9c;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #3d8f98; /* Fundo azul */
+    border: 2px solid #000000; /* Borda preta */
+}
+
+input[type="checkbox"]:checked::after {
+    content: "✔"; /* Símbolo de checkmark */
+    font-size: 11px;
+    color: #202579; /* Check azul escuro */
+    position: absolute;
+    left: 3px;
+    top: -2px;
+}
+
+/* Personalização de Radio Button */
+input[type="radio"] {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #a8a8a8;
+    border: 2px solid #9c9c9c;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+input[type="radio"]:checked {
+    border: 2px solid #005bbb; /* Borda azul */
+}
+
+input[type="radio"]:checked::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: #3d8f98; /* Bolinha azul */
+    border-radius: 50%;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+}
+
+/* Ajuste de Transições */
+input[type="checkbox"], input[type="radio"] {
+    transition: all 0.3s ease-in-out;
+}
+
+
+/* Ajuste de Transições */
+input[type="checkbox"], input[type="radio"] {
+    transition: all 0.3s ease-in-out;
+}
+
+        /*termina aqui*/
+
+
+
+@media (max-width: 768px) {
+    .formulario {
+        padding: 35px;  /* Reduz o padding para dispositivos móveis */
+    }
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Flexível em telas menores */
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+  
+}
+
+.icon-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 10px;
+    position: relative;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+.icon img {
+    width: 50px;
+    height: 50px;
+}
+
+.username-input {
+    background-color: #26314e;
+    border: none;
+    border-radius: 5px;
+    padding: 10px; /* Ajuste do padding interno */
+    color: #ece6ed;
+    width: 250px;
+    display: inline-block;
+    transition: width 0.3s ease;
+    
+}
+
+@media (max-width: 768px) {
+    .username-input {
+        width: 200px; /* Ajusta largura para telas menores */
+        padding: 15px; /* Aumenta o espaço interno */
+    }
+}
+
+
+.instagram-icon {
+    box-shadow: 0 0 15px rgba(225, 48, 108, 0.5);
+}
+
+.spotify-icon {
+    box-shadow: 0 0 15px rgba(30, 215, 96, 0.5);
+}
+
+.youtube-icon {
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+.soundcloud-icon {
+    box-shadow: 0 0 15px rgba(255, 102, 0, 0.5);
+}
+
+.whatsapp-icon {
+    box-shadow: 0 0 15px rgba(30, 215, 96, 0.5);
+}
+
+.email-icon {
+    box-shadow: 0 0 15px rgb(33, 150, 243, 0.5);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #000000;
+}
+
+input[type="text"], textarea {
+    border: none;
+    border-bottom: 2px solid #000000;
+    background: transparent;
+    width: 100%;
+    color: #000000;
+    padding: 10px 5px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+input[type="text"]:focus, textarea:focus {
+    border-bottom: 2px solid #3d8f98; /*COR DA LINHA*/
+    outline: none;
+}
+
+textarea {
+    resize: none;
+    height: 80px;
+}
+
+button[type="submit"] {
+    background-color: #131337;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button[type="submit"]:hover {
+    background-color: #3d8f98;
+}
+
+@media (max-width: 768px) {
+    button[type="submit"] {
+        width: 100%; /* Botão ocupa a largura total em telas menores */
+    }
+}
+
+    </style>
+</head>
+<div class="stars-container">
+    <!-- Estrelas -->
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <!-- Adicione mais estrelas conforme necessário -->
+</div>
+
+<header class="cabeçalho">
+    <h1>Astronauts</h1>
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <nav id="navMenu">
+        <ul>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#djs">DJs</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="foto">
+        <img src="logo.png" alt="fotodjesquerda" height="400px">
+    </div>
+
+    <div class="formulario">
+        <h1>Questionário</h1>
+        <form id="contact-form">
+            <div>
+                <label for="nomeArtistico">Nome Artístico:</label>
+                <input type="text" id="nomeArtistico" name="nomeArtistico" required>
+            </div>
+            
+            <div>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+            
+            <div>
+                <label for="cidade">Cidade que reside:</label>
+                <input type="text" id="cidade" name="cidade" required>
+            </div>
+            
+            <div>
+                <label for="redes">Redes Sociais:</label>
+                <div class="social-icons">
+                    <div class="column">
+                        <div class="icon-container">
+                            <div class="icon instagram-icon">
+                                <img src="instagram.png" alt="Instagram Logo">
+                            </div>
+                            <input type="text" class="username-input" placeholder="@ Seu Instagram" />
+                        </div>
+                        <div class="icon-container">
+                            <div class="icon spotify-icon">
+                                <img src="spotify.png" alt="Spotify Logo">
+                            </div>
+                            <input type="text" class="username-input" placeholder="Coloque o link do Spotify" />
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="icon-container">
+                            <div class="icon youtube-icon">
+                                <img src="youtube.png" alt="YouTube Logo">
+                            </div>
+                            <input type="text" class="username-input" placeholder="Coloque o link do YouTube" />
+                        </div>
+                        <div class="icon-container">
+                            <div class="icon soundcloud-icon">
+                                <img src="soundcloud.png" alt="SoundCloud Logo">
+                            </div>
+                            <input type="text" class="username-input" placeholder="Coloque o link do SoundCloud" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="top">
+                <label>Que tipo de música você toca? (Selecione todas as opções que se aplicam):</label> <br>
+                <input type="checkbox" id="hardstyle" name="musica" value="Hardstyle">
+                <label for="hardstyle">Hardstyle</label><br> 
+                <input type="checkbox" id="psytrance" name="musica" value="Psytrance">
+                <label for="psytrance">Psytrance</label><br> 
+                <input type="checkbox" id="dnb" name="musica" value="Drum and Bass">
+                <label for="dnb">Drum and Bass</label><br> 
+                <input type="checkbox" id="techno" name="musica" value="Techno">
+                <label for="techno">Techno</label><br> 
+                <input type="checkbox" id="electro" name="musica" value="Electro">
+                <label for="electro">Electro</label> <br> 
+                <input type="checkbox" id="outros" name="musica" value="Outros">
+                <label for="outros" style="display: inline;">Outros:</label>
+                <input type="text" id="musica-outros" name="musica-outros" style="display: inline; vertical-align: auto; width: 200px;">
+            </div>
+            
+            <div class="top">
+                <label>Quanto tempo tem experiência como DJ?</label> <br>
+                <input type="radio" id="1-2anos" name="experiencia" value="1-2 anos">
+                <label for="1-2anos">1-2 anos</label> <br> 
+                <input type="radio" id="3-5anos" name="experiencia" value="3-5 anos">
+                <label for="3-5anos">3-5 anos</label> <br> 
+                <input type="radio" id="5-8anos" name="experiencia" value="5-8 anos">
+                <label for="5-8anos">5-8 anos</label> <br> 
+                <input type="radio" id="8mais" name="experiencia" value="8+ anos"> 
+                <label for="8mais">8+ anos</label> <br> 
+            </div>
+            
+            <div class="top">
+                <label>Já participou de alguma rave?</label><br>
+                <input type="radio" name="participacao" value="nao" checked> Não<br> <br>
+                <input type="radio" name="participacao" value="sim"> Sim<br> <br>
+                <div id="raveContainer" style="display: none;"> <!-- Oculto inicialmente -->
+                    <label for="rave">Qual?</label>
+                    <input type="text" id="rave" name="rave" disabled>
+                </div>
+            </div>
+            
+            <div class="social-icons">
+                <div class="column">
+                    <label for="rave">Se houver interesse, adicione seus meios de contato.</label> 
+                    <div class="icon-container">
+                        <div class="icon whatsapp-icon">
+                            <img src="whatsapp.png" alt="WhatsApp Logo">
+                        </div>
+                        <input type="text" class="username-input" name="from_whatsapp" placeholder="Seu WhatsApp" required /> 
+                    </div>
+                    <div class="icon-container">
+                        <div class="icon email-icon">
+                            <img src="email.png" alt="Email Logo">
+                        </div>
+                        <input type="text" class="username-input" name="from_email" placeholder="Seu Email" required />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="botao">
+                <button type="submit">Enviar</button>
+            </div>
+        </form>
+        
+        <script type="text/javascript">
+            // Inicializa o EmailJS com sua chave pública
+            emailjs.init('zfM7GW-8nLqmQ0XzY'); // Use sua chave pública aqui
+        
+            // Envia o e-mail ao enviar o formulário de contato
+            document.getElementById('contact-form').addEventListener('submit', function(event) {
+                event.preventDefault(); // Evita o comportamento padrão do formulário
+        
+                const btn = this.querySelector('button[type="submit"]'); // Obtém o botão de enviar
+                const originalButtonText = btn.textContent; // Salva o texto original do botão
+                btn.disabled = true; // Desabilita o botão para prevenir múltiplos envios
+                btn.textContent = 'Enviando...'; // Muda o texto do botão para 'Enviando...'
+        
+                // Envia o formulário usando o EmailJS
+                emailjs.sendForm('service_ltzh3pv', 'template_myb6qeo', this)
+                    .then(function() {
+                        alert('Mensagem enviada com sucesso!');
+                        btn.disabled = false; // Reabilita o botão
+                        btn.textContent = originalButtonText; // Restaura o texto original
+                        document.getElementById('contact-form').reset(); // Limpa o formulário
+                    }, function(error) {
+                        alert('Falha ao enviar: ' + JSON.stringify(error));
+                        btn.disabled = false; // Reabilita o botão em caso de erro
+                        btn.textContent = originalButtonText; // Restaura o texto original
+                    });
+            });
+        </script>
+    </div>
+</main>
+
+<footer>
+ 
+</body>
+</html>
